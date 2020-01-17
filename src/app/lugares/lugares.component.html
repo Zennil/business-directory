@@ -8,38 +8,20 @@
     <div class="row">
         <div class="col-8">
             <h2>Lugares cercanos</h2>
-            <ul class="list-group">
+            <div class="list-group">
                 <ng-container *ngFor="let lugar of lugares" [ngSwitch]="lugar.cercania">
-                    <li class="list-group-item">
-                        <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'ver', referer:'lugares'}">
-                            {{lugar.nombre}} -
+                    <a routerLink="/detalle/{{lugar.id}}" class="list-group-item list-group-item-action"
+                        [queryParams]="{action:'ver', referer:'lugares'}">
+                        {{lugar.nombre}} -
                         <span *ngSwitchCase="1">Muy Cercano</span>
                         <span *ngSwitchCase="2">Cercano</span>
                         <span *ngSwitchCase="3">Lejano</span>
-                        </a>
-                    </li>
+                    </a>
                 </ng-container>
-            </ul>
+            </div>
         </div>
         <div class="col-md-4">
             <h2>Destacados</h2>
         </div>
     </div>
 </div>
-<hr>
-
-<ul class="list-group">
-    <ng-container *ngFor="let lugar of lugares;let i = index" [ngSwitch]="lugar.cercania">
-
-        <li class="list-group-item" [ngStyle]="{color: (lugar.active) ? 'black' : 'gray'}"
-            [ngClass]="{'numero-par': (i+1) % 2 === 0 }" [resaltar]="lugar.plan">
-            <a href="javascript:" contar-clicks>
-                {{lugar.nombre}} -
-                <span *ngSwitchCase="1" [ngStyle]="{color: 'green'}">Muy Cercano</span>
-                <span *ngSwitchCase="2" [ngStyle]="{color: 'orange'}">Cercano</span>
-                <span *ngSwitchCase="3" [ngStyle]="{color: 'red'}">Lejano</span>
-            </a>
-        </li>
-
-    </ng-container>
-</ul>

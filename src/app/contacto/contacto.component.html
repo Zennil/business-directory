@@ -1,0 +1,59 @@
+<nav>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/lugares">Lugares</a></li>
+        <li class="breadcrumb-item active">Contacto</li>
+    </ol>
+</nav>
+<div class="container">
+    <div class="row py-5">
+        <div class="col-5">
+            <div class="card">
+                <agm-map [latitude]="lat" [longitude]="lng">
+                    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+                </agm-map>
+                <div class="card-body">
+                    <h5 class="card-title">Ubicación</h5>
+                    <p class="card-text">Iusto quos vel repellat quidem dolores, beatae, neque, magni architecto qui
+                        molestias alias tempora quia quibusdam harum dolorem modi. Harum, vel voluptatum.</p>
+                    <hr>
+                    <h6 class="card-subtitle text-muted">Siguenos en:</h6>
+                    <ul class="list-inline pt-2">
+                        <li class="list-inline-item"><a href="javascript:" class="text-primary"><span><i
+                                        class="fab fa-2x fa-facebook-square"></i></span></a></li>
+                        <li class="list-inline-item"><a href="javascript:" class="text-danger"><span><i
+                                        class="fab fa-2x fa-instagram"></i></span></a></li>
+                        <li class="list-inline-item"><a href="javascript:" class="text-info"><span><i
+                                        class="fab fa-2x fa-twitter-square"></i></span></a></li>
+                        <li class="list-inline-item"><a href="javascript:" class="text-danger"><span><i
+                                        class="fab fa-2x fa-youtube-square"></i></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="alert alert-secondary">
+                <p>Minima incidunt tempora magnam accusamus architecto nisi debitis illum cum eius? Delectus numquam
+                    placeat quis deserunt nostrum corrupti incidunt laboriosam sunt quam?</p>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo</label>
+                    <input id="email" type="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea id="mensaje" rows="3" class="form-control"></textarea>
+                </div>
+                <hr>
+                <div class="float-right">
+                    <button type="button" class="btn btn-success mr-2">Enviar</button>
+                    <button type="button" class="btn btn-secondary" routerLink="/lugares">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
