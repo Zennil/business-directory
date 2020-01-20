@@ -7,8 +7,9 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            <h2>Lugares cercanos</h2>
-            <div class="list-group">
+            <h2 class="d-inline">Lugares cercanos</h2>
+            <button routerLink="/crear" type="button" class="btn btn-success float-right">Agregar comercio</button>
+            <div class="list-group mt-3">
                 <ng-container *ngFor="let lugar of lugares" [ngSwitch]="lugar.cercania">
                     <a routerLink="/detalle/{{lugar.id}}" class="list-group-item list-group-item-action"
                         [queryParams]="{action:'ver', referer:'lugares'}">
