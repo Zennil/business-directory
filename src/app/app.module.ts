@@ -11,6 +11,14 @@ import { DetalleComponent } from './detalle/detalle.component';
 import { LugaresComponent } from './lugares/lugares.component';
 import { ContactoComponent } from './contacto/contacto.component';
 
+// FIREBASE
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from 'src/environments/environment';
+import { CrearComponent } from './crear/crear.component';
+import { LugaresService } from './services/lugares.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +26,8 @@ import { ContactoComponent } from './contacto/contacto.component';
     ContarClicksDirective,
     DetalleComponent,
     LugaresComponent,
-    ContactoComponent
+    ContactoComponent,
+    CrearComponent
   ],
   imports: [
     BrowserModule,
@@ -26,9 +35,14 @@ import { ContactoComponent } from './contacto/contacto.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBvKxxyjEPPNu5qwcRZMH2Otwy2OdXH-6E'
     }),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    LugaresService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
