@@ -20,6 +20,8 @@ export class CrearComponent implements OnInit {
     saveLugar() {
         console.log(this.newLugar);
         this.lugaresService.saveLugares(this.newLugar);
+        alert('Se guardo el negocio exitosamente.');
+        this.newLugar = new Lugar();
     }
-    
+
 }

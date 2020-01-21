@@ -12,7 +12,7 @@
             <div class="list-group mt-3">
                 <ng-container *ngFor="let lugar of lugares" [ngSwitch]="lugar.cercania">
                     <a routerLink="/detalle/{{lugar.id}}" class="list-group-item list-group-item-action"
-                        [queryParams]="{action:'ver', referer:'lugares'}">
+                        [queryParams]="{action:'ver', referer:'lugares'}"> <!-- *ngIf="lugar.active" -->
                         {{lugar.nombre}} -
                         <span *ngSwitchCase="1">Muy Cercano</span>
                         <span *ngSwitchCase="2">Cercano</span>

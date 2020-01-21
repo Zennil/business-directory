@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LugaresService } from '../services/lugares.service';
+import { Lugar } from '../models/lugar.model';
 
 @Component({
     selector: 'app-lugares',
@@ -15,7 +16,10 @@ export class LugaresComponent implements OnInit {
     lng = -100.4059456;
 
     constructor(private lugaresService: LugaresService) {
-        this.lugares = lugaresService.getLugares();
+        this.lugaresService.getLugares().subscribe(respuesta => {
+            this.lugares = respuesta as Lugar[];
+            console.log(respuesta);
+        });
     }
 
     ngOnInit() { }
