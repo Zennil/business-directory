@@ -1,25 +1,30 @@
 <agm-map [latitude]="lat" [longitude]="lng">
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    <agm-marker *ngFor="let lugar of lugares" [latitude]="lugar.lat" [longitude]="lugar.lng"></agm-marker>
 </agm-map>
 
 <hr>
 
 <div class="container">
-    <div class="row">
+    <div class="row py-4">
         <div class="col-8">
             <h2 class="d-inline">Lugares cercanos</h2>
-            <button routerLink="/crear" type="button" class="btn btn-success float-right">Agregar comercio</button>
-            <div class="list-group mt-3">
+            <button routerLink="/crear/new" type="button" class="btn btn-success float-right">Agregar comercio</button>
+            <ul class="list-group mt-3">
                 <ng-container *ngFor="let lugar of lugares" [ngSwitch]="lugar.cercania">
-                    <a routerLink="/detalle/{{lugar.id}}" class="list-group-item list-group-item-action"
-                        [queryParams]="{action:'ver', referer:'lugares'}"> <!-- *ngIf="lugar.active" -->
-                        {{lugar.nombre}} -
-                        <span *ngSwitchCase="1">Muy Cercano</span>
-                        <span *ngSwitchCase="2">Cercano</span>
-                        <span *ngSwitchCase="3">Lejano</span>
-                    </a>
+                    <li class="list-group-item list-group-item-action">
+                        <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'ver', referer:'lugares'}">
+                            <!-- *ngIf="lugar.active" -->
+                            {{lugar.nombre}} -
+                            <span *ngSwitchCase="1">Muy Cercano</span>
+                            <span *ngSwitchCase="2">Cercano</span>
+                            <span *ngSwitchCase="3">Lejano</span>
+                        </a>
+                        <button type="button" class="float-right btn btn-info btn-sm"
+                            routerLink="/crear/{{lugar.id}}"><i class="fa fa-pen"></i>
+                        </button>
+                    </li>
                 </ng-container>
-            </div>
+            </ul>
         </div>
         <div class="col-md-4">
             <h2>Destacados</h2>

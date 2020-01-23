@@ -1,34 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Lugar } from '../models/lugar.model';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { HttpClient } from '@angular/common/http';
+import { Direccion } from '../models/direccion';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class LugaresService {
 
-    lugares: Lugar[] = [
-        { id: 1, plan: 'Free', cercania: 1, distancia: 6, active: false, nombre: 'Floreria la Gardenia' },
-        { id: 2, plan: 'Premium', cercania: 3, distancia: 24, active: true, nombre: 'Donas la pasadita' },
-        { id: 3, plan: 'Premium', cercania: 2, distancia: 17, active: false, nombre: 'Veterinaria huellas' },
-        { id: 4, plan: 'Free', cercania: 1, distancia: 9, active: true, nombre: 'Sushi Rol' },
-        { id: 5, plan: 'Premium', cercania: 2, distancia: 11, active: true, nombre: 'Hotel la Gracia' },
-        { id: 6, plan: 'Free', cercania: 2, distancia: 14, active: true, nombre: 'Zapateria el Real' }
-    ];
-
-    constructor(private afDB: AngularFireDatabase) { }
+    constructor(private afDB: AngularFireDatabase, private http: HttpClient) { }
 
     getLugares() {
         return this.afDB.list('lugares/').valueChanges();
     }
 
     getLugarById(id: number) {
-        return this.lugares.filter((lugar) => lugar.id == id)[0] || null;
+        return this.afDB.object('lugares/' + id).valueChanges();
     }
 
-    saveLugares(lugar: Lugar) {
+    saveLugar(lugar: Lugar) {
         lugar.id = Date.now();
         this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
     }
 
+    editLugar(lugar: Lugar) {
+        this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
+    }
+
+    getGeocode(dir: Direccion) {
+        const urlGeocode = 'https://maps.google.com/maps/api/geocode/json?address=';
+        return this.http.get(urlGeocode + dir.calle + ',' + dir.ciudad + ',' + dir.pais + '&key=' + environment.apiKeyG);
+    }
 }

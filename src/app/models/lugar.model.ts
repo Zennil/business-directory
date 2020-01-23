@@ -1,3 +1,5 @@
+import { Direccion } from './direccion';
+
 export class Lugar {
     id: number;
     plan: string;
@@ -5,4 +7,7 @@ export class Lugar {
     distancia: number;
     active: boolean;
     nombre: string;
+    direccion: Direccion = new Direccion();
+    lat: number;
+    lng: number;
 }

@@ -12,8 +12,8 @@ export class LugaresComponent implements OnInit {
 
     private lugares: any = [];
 
-    lat = 10.6235518;
-    lng = -100.4059456;
+    lat = 20.2666231;
+    lng = -98.944817;
 
     constructor(private lugaresService: LugaresService) {
         this.lugaresService.getLugares().subscribe(respuesta => {

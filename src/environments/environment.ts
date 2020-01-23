@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: 'business-directory-6b044.appspot.com',
     messagingSenderId: '1034491455795',
     appId: '1:1034491455795:web:aa3595ae1b0e6d717a3646'
-  }
+  },
+  apiKeyG: 'AIzaSyBvKxxyjEPPNu5qwcRZMH2Otwy2OdXH-6E'
 };
 
 /*
