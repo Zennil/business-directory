@@ -17,10 +17,11 @@ export class LugaresComponent implements OnInit {
 
     constructor(private lugaresService: LugaresService) {
         this.lugaresService.getLugares().subscribe(respuesta => {
-            this.lugares = respuesta as Lugar[];
-            console.log(respuesta);
+            // this.lugares = respuesta as Lugar[];
+            this.lugares = Object.keys(respuesta).map(key => respuesta[key]);
         });
     }
 
     ngOnInit() { }
+    
 }

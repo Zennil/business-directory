@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Lugar } from '../models/lugar.model';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Direccion } from '../models/direccion';
 import { environment } from 'src/environments/environment';
 
@@ -10,10 +10,13 @@ import { environment } from 'src/environments/environment';
 })
 export class LugaresService {
 
+    API_ENDPOINT = 'https://business-directory-6b044.firebaseio.com';
+
     constructor(private afDB: AngularFireDatabase, private http: HttpClient) { }
 
     getLugares() {
-        return this.afDB.list('lugares/').valueChanges();
+        return this.http.get(this.API_ENDPOINT + '/lugares.json');
+        // return this.afDB.list('lugares/').valueChanges();
     }
 
     getLugarById(id: number) {
@@ -22,7 +25,11 @@ export class LugaresService {
 
     saveLugar(lugar: Lugar) {
         lugar.id = Date.now();
-        this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
+        const headers = new HttpHeaders({ "Content-Type": "application/json" });
+        return this.http.post(this.API_ENDPOINT + '/lugares.json', lugar, { headers: headers }).subscribe(response => {
+            console.log(response);
+        });
+        // this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
     }
 
     editLugar(lugar: Lugar) {
