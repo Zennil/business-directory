@@ -10,18 +10,22 @@ import { Lugar } from '../models/lugar.model';
 export class LugaresComponent implements OnInit {
 
 
-    private lugares: any = [];
+    lugares: any = [];
+
+    errorText: string;
 
     lat = 20.2666231;
     lng = -98.944817;
 
     constructor(private lugaresService: LugaresService) {
         this.lugaresService.getLugares().subscribe(respuesta => {
-            // this.lugares = respuesta as Lugar[];
             this.lugares = Object.keys(respuesta).map(key => respuesta[key]);
+        }, error => {
+            console.log(error);
+            this.errorText = error.statusText;
         });
     }
 
     ngOnInit() { }
-    
+
 }

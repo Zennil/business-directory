@@ -19,16 +19,20 @@ import { environment } from 'src/environments/environment';
 import { CrearComponent } from './crear/crear.component';
 import { LugaresService } from './services/lugares.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ResaltarDistanciaDirective } from './directives/resaltar-distancia.directive';
+import { LinkifystrPipe } from './pipes/linkifystr.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResaltarDirective,
+    ResaltarDistanciaDirective,
     ContarClicksDirective,
     DetalleComponent,
     LugaresComponent,
     ContactoComponent,
-    CrearComponent
+    CrearComponent,
+    LinkifystrPipe
   ],
   imports: [
     BrowserModule,

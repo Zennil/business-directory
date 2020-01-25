@@ -5,6 +5,16 @@
 <hr>
 
 <div class="container">
+    <div class="row justify-content-center" *ngIf="errorText">
+        <div class="col-5">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                No fue posible cargar los datos. <strong>Error: {{errorText}}</strong>
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="row py-4">
         <div class="col-8">
             <h2 class="d-inline">Lugares cercanos</h2>
@@ -12,16 +22,21 @@
             <ul class="list-group mt-3">
                 <ng-container *ngFor="let lugar of lugares" [ngSwitch]="lugar.cercania">
                     <li class="list-group-item list-group-item-action">
-                        <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'ver', referer:'lugares'}">
-                            <!-- *ngIf="lugar.active" -->
-                            {{lugar.nombre}} -
-                            <span *ngSwitchCase="1">Muy Cercano</span>
-                            <span *ngSwitchCase="2">Cercano</span>
-                            <span *ngSwitchCase="3">Lejano</span>
-                        </a>
                         <button type="button" class="float-right btn btn-info btn-sm"
                             routerLink="/crear/{{lugar.id}}"><i class="fa fa-pen"></i>
                         </button>
+                        <strong>
+                            <a routerLink="/detalle/{{lugar.id}}" [queryParams]="{action:'ver', referer:'lugares'}">
+                                <!-- *ngIf="lugar.active" -->
+                                {{lugar.nombre | uppercase}}</a>
+                        </strong>
+                        <span *ngSwitchCase="1" [resaltarDistancia]="lugar.cercania"> -Muy Cercano</span>
+                        <span *ngSwitchCase="2" [resaltarDistancia]="lugar.cercania"> -Cercano</span>
+                        <span *ngSwitchCase="3" [resaltarDistancia]="lugar.cercania"> -Lejano</span>
+
+                        <br>
+                        <small class="text-muted">Creado: {{lugar.id | date: 'short' | uppercase}}</small>
+                        <p>{{lugar.descripcion | linkifystr}}</p>
                     </li>
                 </ng-container>
             </ul>

@@ -21,6 +21,7 @@ export class CrearComponent implements OnInit {
         if (this.idLugar !== 'new') {
             this.lugaresService.getLugarById(this.idLugar).subscribe(response => {
                 this.newLugar = response as Lugar;
+                console.log(response);
             });
         }
 
