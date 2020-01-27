@@ -24,6 +24,7 @@ import { LinkifystrPipe } from './pipes/linkifystr.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { MyGuardian } from './services/my-guardian.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { RegistroComponent } from './registro/registro.component';
     BrowserAnimationsModule
   ],
   providers: [
-    LugaresService
+    LugaresService,
+    MyGuardian
   ],
   bootstrap: [AppComponent]
 })

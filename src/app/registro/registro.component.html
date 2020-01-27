@@ -1,21 +1,21 @@
 <div class="container">
     <div class="row justify-content-center mt-5">
         <div class="col-4">
-            <div class="card">
+            <div class="card" style="background-color: #ebebeb;">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control">
+                        <input type="email" class="form-control" [(ngModel)]="newRegistro.email">
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control">
+                        <input type="password" class="form-control" [(ngModel)]="newRegistro.password">
                     </div>
                     <hr>
-                    <button class="btn btn-primary btn-block my-2">Registrarse</button>
-                    <button class="btn btn-secondary btn-block my-2">Cancelar</button>
+                    <button class="btn btn-warning btn-block my-2" (click)="registrarse()">Registrarse</button>
+                    <button class="btn btn-secondary btn-block my-2" routerLink="/lugares">Cancelar</button>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 </div>

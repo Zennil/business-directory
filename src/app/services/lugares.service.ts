@@ -16,10 +16,10 @@ export class LugaresService {
     constructor(private afDB: AngularFireDatabase, private http: HttpClient) { }
 
     getLugares() {
-        return this.http.get(this.API_ENDPOINT + '/.json').pipe(map((response: any) => {
-            return response.lugares;
-        }));
-        // return this.afDB.list('lugares/').valueChanges();
+        // return this.http.get(this.API_ENDPOINT + '/.json').pipe(map((response: any) => {
+        //     return response.lugares;
+        // }));
+        return this.afDB.list('lugares/').valueChanges();
     }
 
     getLugarById(id: number) {
@@ -28,11 +28,11 @@ export class LugaresService {
 
     saveLugar(lugar: Lugar) {
         lugar.id = Date.now();
-        const httpHeadrs = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post(this.API_ENDPOINT + '/lugares.json', lugar, { headers: httpHeadrs }).subscribe(response => {
-            console.log(response);
-        });
-        // this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
+        // const httpHeadrs = new HttpHeaders({ 'Content-Type': 'application/json' });
+        // return this.http.post(this.API_ENDPOINT + '/lugares.json', lugar, { headers: httpHeadrs }).subscribe(response => {
+        //     console.log(response);
+        // });
+        this.afDB.database.ref('lugares/' + lugar.id).set(lugar);
     }
 
     editLugar(lugar: Lugar) {

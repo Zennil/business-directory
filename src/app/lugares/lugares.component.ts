@@ -43,7 +43,7 @@ export class LugaresComponent implements OnInit {
     state = 'inicial';
     stateDestacados = 'inicia';
 
-    errorText: string;
+    errorText = false;
 
     lat = 20.2666231;
     lng = -98.944817;
@@ -63,7 +63,7 @@ export class LugaresComponent implements OnInit {
             this.lugares = Object.keys(respuesta).map(key => respuesta[key]);
         }, error => {
             console.log(error);
-            this.errorText = error.statusText;
+            this.errorText = true;
         });
     }
 

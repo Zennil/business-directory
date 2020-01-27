@@ -7,6 +7,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { CrearComponent } from './crear/crear.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
+import { MyGuardian } from './services/my-guardian.service';
 
 
 const routes: Routes = [
@@ -14,9 +15,11 @@ const routes: Routes = [
   { path: 'lugares', component: LugaresComponent },
   { path: 'detalle/:idLugar', component: DetalleComponent },
   { path: 'contacto', component: ContactoComponent },
-  { path: 'crear/:idLugar', component: CrearComponent },
+  { path: 'crear/:idLugar', component: CrearComponent, canActivate: [MyGuardian] },
   { path: 'login', component: LoginComponent },
-  { path: 'registro', component: RegistroComponent }
+  { path: 'registro', component: RegistroComponent },
+
+  { path: '**', redirectTo: 'lugares' }
 ];
 
 @NgModule({
