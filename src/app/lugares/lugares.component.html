@@ -36,13 +36,27 @@
 
                         <br>
                         <small class="text-muted">Creado: {{lugar.id | date: 'short' | uppercase}}</small>
-                        <p>{{lugar.descripcion | linkifystr}}</p>
+                        <p class="mb-0" [innerHtml]="lugar.descripcion | linkifystr"></p>
                     </li>
                 </ng-container>
             </ul>
         </div>
         <div class="col-md-4">
             <h2>Destacados</h2>
+            <ng-container *ngFor="let lugar of lugares">
+                <ng-container *ngIf="lugar.plan === 'Premium'">
+                    <div class="card mb-3" [@destacados]="stateDestacados">
+                        <div class="card-body">
+                            <h3 class="card-text text-success"><strong>{{lugar.nombre}}</strong></h3>
+                            <p class="card-text" [innerHtml]="lugar.descripcion | linkifystr"></p>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+
+            <button class="btn btn-warning" (click)="animar()">Activar cuadrado</button>
+            <div id="cuadrado" [@contenedorAnimable]="state" (@contenedorAnimable.start)="iniciaAnimacion($event)"
+                (@contenedorAnimable.done)="terminaAnimacion($event)"></div>
         </div>
     </div>
 </div>

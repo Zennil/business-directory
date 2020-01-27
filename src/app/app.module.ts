@@ -21,6 +21,9 @@ import { LugaresService } from './services/lugares.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ResaltarDistanciaDirective } from './directives/resaltar-distancia.directive';
 import { LinkifystrPipe } from './pipes/linkifystr.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './login/login.component';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { LinkifystrPipe } from './pipes/linkifystr.pipe';
     LugaresComponent,
     ContactoComponent,
     CrearComponent,
-    LinkifystrPipe
+    LinkifystrPipe,
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,8 @@ import { LinkifystrPipe } from './pipes/linkifystr.pipe';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     LugaresService
