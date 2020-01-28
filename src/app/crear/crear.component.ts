@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { LugaresService } from '../services/lugares.service';
 import { Lugar } from '../models/lugar.model';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { switchMap, map, debounceTime } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-crear',
@@ -14,16 +19,31 @@ export class CrearComponent implements OnInit {
 
     newLugar: Lugar = new Lugar();
 
-    constructor(private lugaresService: LugaresService, private route: ActivatedRoute) {
+    results$: Observable<any>;
+    searchField: FormControl;
+
+
+    constructor(private lugaresService: LugaresService, private route: ActivatedRoute, private http: HttpClient) {
 
         this.idLugar = this.route.snapshot.params.idLugar;
-
         if (this.idLugar !== 'new') {
             this.lugaresService.getLugarById(this.idLugar).subscribe(response => {
                 this.newLugar = response as Lugar;
-                console.log(response);
             });
         }
+
+        const URL = 'https://maps.google.com/maps/api/geocode/json?&key=' + environment.apiKeyG;
+        this.searchField = new FormControl();
+        this.results$ = this.searchField.valueChanges.pipe(
+            debounceTime(800),
+            switchMap(query => {
+                if (query) {
+                    return this.http.get(URL + '&address=' + query);
+                } else {
+                    return [];
+                }
+            }),
+            map((respons: any) => respons.results));
 
     }
 
@@ -45,6 +65,14 @@ export class CrearComponent implements OnInit {
 
             this.newLugar = new Lugar();
         });
+    }
+
+    fillDirection(direccion: any) {
+        console.log(direccion);
+        this.newLugar.direccion.calle = direccion[1].long_name + direccion[0].long_name;
+        this.newLugar.direccion.ciudad = direccion[4].long_name;
+        this.newLugar.direccion.pais = direccion[5].long_name;
+        this.searchField.reset();
     }
 
 }

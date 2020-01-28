@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { AutorizacionService } from './services/autorizacion.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,15 +7,18 @@ import { AutorizacionService } from './services/autorizacion.service';
 })
 export class AppComponent {
 
-  title = 'business-directory';
-
   loggedIn = false;
+  loggedUser: any = null;
 
   constructor(private authService: AutorizacionService) {
     this.authService.isLogged().subscribe((response: any) => {
-      console.log(response);
       if (response && response.uid) {
         this.loggedIn = true;
+        setTimeout(() => {
+          this.loggedUser = this.authService.getUser().currentUser.email;
+          console.log(this.loggedUser);
+        }, 1000);
+
       } else {
         this.loggedIn = false;
       }

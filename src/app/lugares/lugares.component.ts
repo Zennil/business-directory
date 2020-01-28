@@ -49,13 +49,13 @@ export class LugaresComponent implements OnInit {
     lng = -98.944817;
 
     iniciaAnimacion(e) {
-        console.log('Iniciando');
-        console.log(e);
+        // console.log('Iniciando');
+        // console.log(e);
     }
 
     terminaAnimacion(e) {
-        console.log('Terminado');
-        console.log(e);
+        // console.log('Terminado');
+        // console.log(e);
     }
 
     constructor(private lugaresService: LugaresService) {

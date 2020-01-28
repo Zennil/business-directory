@@ -52,4 +52,8 @@ export class AutorizacionService {
         return this.authService.authState;
     }
 
+    getUser() {
+        return this.authService.auth;
+    }
+
 }
